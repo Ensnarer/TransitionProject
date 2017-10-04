@@ -3,6 +3,11 @@
 % note: TransitionClass is a subclass of 'handle' class. This makes all
 % TransitionClass objects references: all modifications to handle objects
 % affect the original object.
+%
+% usage:
+% Transition1 = TransitionClass(initial_ned,final_ned,pairings);
+% Transition2 = TransitionClass(initial_ned,final_ned);
+% Transition3 = TransitionClass(Transition1);
 
 classdef TransitionClass < handle 
     
@@ -12,15 +17,11 @@ classdef TransitionClass < handle
         pairings
         
         n
-        intermediate_points
+        intermediate_points % indices are in <initial_ned> indices
     end
     methods
         % constructor
         function obj=TransitionClass(initial_ned,final_ned,pairings)
-            % usage: 
-            % obj1=TransitionClass(initial_ned,final_ned);
-            % obj1=TransitionClass(initial_ned,final_ned,pairings);
-            % obj2=TransitionClass(obj1);
             
             % copy constructor
             if nargin==1 && isa(initial_ned,'TransitionClass')
@@ -28,6 +29,7 @@ classdef TransitionClass < handle
                 % (TransitionClass), then this constructor is being called
                 % as a copy constructor.
                 original_object = initial_ned;
+                
                 obj.initial_ned     = original_object.initial_ned;
                 obj.final_ned       = original_object.final_ned;
                 obj.pairings        = original_object.pairings;
