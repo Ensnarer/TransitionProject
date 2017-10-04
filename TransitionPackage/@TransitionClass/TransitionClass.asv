@@ -17,25 +17,10 @@ classdef TransitionClass < handle
     methods
         % constructor
         function obj=TransitionClass(initial_ned,final_ned,pairings)
-            % usage: 
-            % obj1=TransitionClass(initial_ned,final_ned);
-            % obj1=TransitionClass(initial_ned,final_ned,pairings);
-            % obj2=TransitionClass(obj1);
+            % usage: obj=TransitionClass(initial_ned,final_ned,pairings)
             
             % copy constructor
-            if nargin==1 && isa(initial_ned,'TransitionClass')
-                % if first (and only) argument is an object of this class
-                % (TransitionClass), then this constructor is being called
-                % as a copy constructor.
-                original_object = initial_ned;
-                obj.initial_ned     = original_object.initial_ned;
-                obj.final_ned       = original_object.final_ned;
-                obj.pairings        = original_object.pairings;
-                obj.n               = original_object.n;
-                obj.intermediate_points     = original_object.intermediate_points;
-                
-                return;
-            end
+            if isa(
             
             
             
@@ -53,11 +38,11 @@ classdef TransitionClass < handle
             end
             
             % assignment
+            obj.n = size(initial_ned,1);
             obj.initial_ned = initial_ned;
             obj.final_ned = final_ned;
             obj.pairings = pairings;
-            obj.n = size(initial_ned,1);
-            obj.intermediate_points = [];
+
         end
     end
 end
