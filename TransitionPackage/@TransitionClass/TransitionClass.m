@@ -12,12 +12,19 @@
 classdef TransitionClass < handle 
     
     properties
-        initial_ned
-        final_ned
-        pairings
+        initial_ned % all initial positions of drones (NED)
+        final_ned % all final positions of drones (NED)
+        pairings % nx2 array indicating which initial position goes to which final position
         
-        n
+        n % number of drones involved in transition
         intermediate_points % indices are in <initial_ned> indices
+        C_duration % cost matrix of durations
+        C_distance % cost matrix of distances
+    end
+    properties (Constant)
+        max_horizontal_speed = 3
+        max_vertical_velocity = 1 % downwards
+        min_vertical_velocity = -2 % upwards
     end
     methods
         % constructor
@@ -62,4 +69,11 @@ classdef TransitionClass < handle
             obj.intermediate_points = [];
         end
     end
+        
+%     % class method function signatures
+%     methods
+%         compute_duration_cost_matrix(obj)
+%         % computes obj.C_duration, whose (i,j) entry is the minimum duration
+%         % required for a drone at initial_ned(i,:) to move to final_ned(j,:)
+%     end
 end
